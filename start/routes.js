@@ -15,16 +15,33 @@
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 
-const Database = use('Database')
+// const Database = use('Database')
 const Route = use('Route')
 
 Route.on('/').render('welcome')
 
+// Route.get('/posts',() => 'list of posts.')
+
+// Route.post('/posts',() => 'post here!')
+Route.get('/posts','PostController.index')
+Route.post('/posts/:id',({  params }) => {
+  return `the post id is ${ params.id }`
+})
+
+Route.patch('/posts/:id',({ params }) => {
+  return `post of ${ params.id } has been updated!`
+
+})
+
+Route.delete('/posts/:id',({params}) => {
+  return `post ${ params.id } has been removed!`
+})
+
 // Route.get('/hello',({ request }) => {
 //   return `hello ~ ${ request.input('name')}`
 // })
-Route.get('/hello','HelloController.render')
-
-Route.get('/posts', async () => {
-  return await Database.table('posts').select('*')
-})
+// Route.get('/hello','HelloController.render')
+//
+// Route.get('/posts', async () => {
+//   return await Database.table('posts').select('*')
+// })
