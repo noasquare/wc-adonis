@@ -1,0 +1,22 @@
+@each(xx in entities)
+  <div
+    style="
+      padding:10px;
+      @if(!$loop.last && border)
+      border-bottom: 1px solid {{ borderColor || '#eee' }}
+      @endif
+    "
+  >
+    <small>
+      {{$loop.index + 1}}.
+      first:<i>{{$loop.first}}</i>
+    </small>
+    {{ xx.title }}:{{ xx.content }}
+
+  </div>
+
+@endeach
+
+@yield($slot.notes)
+  <small>put some notes here!</small>
+@endyield
